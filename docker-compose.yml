@@ -168,27 +168,15 @@ services:
 # <<< cp-all-in-one
 
 #
-# >>> mongodb
+# >>> mysql
 #
   db:
-    image: mongo:4.4.2
-    ports:
-      - 27017:27017
-    volumes:
-      - "./docker/mongo/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    image: mysql:8.0.22
     environment:
-      MONGO_INITDB_DATABASE: demo
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-  mongo-express:
-    image: mongo-express:latest
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=demo
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
     ports:
-      - 8888:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: password
-      ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_SERVER: db
-    depends_on:
-      - db
+      - 3306:3306
 # <<< mongodb
