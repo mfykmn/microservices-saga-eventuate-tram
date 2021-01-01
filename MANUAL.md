@@ -7,9 +7,13 @@ user@host: ~/workspace/microservice-sage-eventuate $ docker-compose -f docker-co
 
 ## Usage
 ### App
+- Service実行
+    ```ShellSession
+    user@host: ~/workspace/microservice-sage-eventuate $ ./gradlew bootRun
+    ```
 - Order ServiceをCLIで利用する
     ```ShellSession
-    user@host: ~ $ curl -X GET http://0.0.0.0:10000/orders/84bf789c-f486-4ad6-8c5c-4ba243fe333b
+    user@host: ~ $ curl -X GET http://0.0.0.0:10000/orders/23c0ef28-a8c3-40e4-8721-1c3c9f4e284f
     user@host: ~ $ curl -X POST http://0.0.0.0:10000/orders
     ```
 

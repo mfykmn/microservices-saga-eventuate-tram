@@ -6,6 +6,6 @@ import java.util.concurrent.CompletableFuture
 
 
 interface OrderService {
-    fun createOrder(): CompletableFuture<String?>?
+    fun createOrder(): Order
     fun findById(orderId: OrderId) : Order?
 }

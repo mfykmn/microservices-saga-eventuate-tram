@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import com.example.sagas.application.OrderServiceImpl
 import com.example.sagas.domain.entity.OrderId
-import java.util.concurrent.CompletableFuture
 
 @RestController
 @RequestMapping(path = ["orders"])
@@ -26,11 +25,13 @@ class OrderServiceHandler {
     }
 
     @PostMapping()
-    fun createOrder() : CompletableFuture<String?>? {
+    fun createOrder() : ResponseEntity<String> {
         // TODO: リクエスト取得
         // TODO: バリデーション
         // TODO: リクエストボディをドメインモデルに落とし込み
 
-        return serviceImpl.createOrder()
+        serviceImpl.createOrder()
+
+        return ResponseEntity.ok("success")
     }
 }
