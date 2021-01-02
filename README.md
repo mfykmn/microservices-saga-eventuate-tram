@@ -7,7 +7,7 @@ Eventuate Tramでは、Sagaをサポートしている
 
 データ格納先のテーブルとOutboxテーブルをトランザクションでまとめている
 
-また[CDC](https://eventuate.io/abouteventuatetram.html)を実装しているため、binlogからメッセージブローカーへデータを送信する動きをすることでイベントを発行する
+また、Eventuate Tramでは[CDC](https://eventuate.io/abouteventuatetram.html)を実装しているため、binlogからメッセージブローカーへデータを送信する動きをすることでイベントを発行している
 
 ## 参考リンク
 - https://eventuate.io/exampleapps.html
