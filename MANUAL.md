@@ -18,10 +18,10 @@ user@host: ~/workspace/microservice-sage-eventuate $ docker-compose -f docker-co
       "price": 706,
       "currency": "USD"
     }'
-    success
+    {"order_id":"4cd40458-4b8a-4408-b9bd-bfac4b758749","order_status":"CREATED"}
 
     user@host: ~ $ curl -X GET http://0.0.0.0:10000/orders/4cd40458-4b8a-4408-b9bd-bfac4b758749
-    {"orderId":"4cd40458-4b8a-4408-b9bd-bfac4b758749","itemType":"SMARTPHONE","price":706,"currency":"USD","orderStatus":"CREATED"}
+    {"order_id":"4cd40458-4b8a-4408-b9bd-bfac4b758749","order_status":"CREATED","item_type":"SMARTPHONE","price":706,"currency":"USD"}
     ```
 
 ### MySQL
