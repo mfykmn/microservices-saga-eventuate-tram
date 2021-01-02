@@ -5,4 +5,3 @@ pluginManagement {
         maven("https://plugins.gradle.org/m2/")
     }
 }
-include("order-service")
