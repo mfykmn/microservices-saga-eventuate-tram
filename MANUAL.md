@@ -14,6 +14,11 @@
     ```ShellSession
     user@host: ~/workspace/microservice-sage-eventuate-tram/payment-service $ ./gradlew bootRun
     ```
+- Shipment Service実行
+  gradle build実行後に
+    ```ShellSession
+    user@host: ~/workspace/microservice-sage-eventuate-tram/shipment-service $ ./gradlew bootRun
+    ```
 
 ## Usage
 ### App
@@ -32,6 +37,10 @@
 - Payment ServiceをCLIで利用する
     ```ShellSession
     user@host: ~ $ curl -X GET http://0.0.0.0:10001/payments/4cd40458-4b8a-4408-b9bd-bfac4b758749
+    ```
+- Shipment ServiceをCLIで利用する
+    ```ShellSession
+    user@host: ~ $ curl -X GET http://0.0.0.0:10002/shipments/4cd40458-4b8a-4408-b9bd-bfac4b758749
     ```
 
 ### MySQL
