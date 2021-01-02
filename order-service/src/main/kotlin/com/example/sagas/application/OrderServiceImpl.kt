@@ -14,11 +14,10 @@ class OrderServiceImpl : OrderService {
     @Autowired
     lateinit var orderRepository: OrderRepository
 
-    override fun createOrder() : Order {
+    override fun createOrder(itemType: ItemType, price: BigDecimal, currency: String) : Order {
         // Orderを作る
-        val order = Order(ItemType.HEADPHONE,
-            BigDecimal(1000),
-            "test")
+        val order = Order(itemType, price, currency)
+
 //        ResultWithEvents<Order> orderAndEvents = Order.createOrder(orderDetails)
 //        Order order = orderAndEvents.result
 //

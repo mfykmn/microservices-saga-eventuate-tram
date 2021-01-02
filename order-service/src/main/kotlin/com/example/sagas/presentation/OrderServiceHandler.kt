@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import com.example.sagas.application.OrderServiceImpl
+import com.example.sagas.domain.entity.ItemType
 import com.example.sagas.domain.entity.OrderId
 
 @RestController
@@ -25,12 +26,13 @@ class OrderServiceHandler {
     }
 
     @PostMapping()
-    fun createOrder() : ResponseEntity<String> {
-        // TODO: リクエスト取得
+    fun createOrder(@RequestBody request: CreateOrderRequest) : ResponseEntity<String> {
         // TODO: バリデーション
-        // TODO: リクエストボディをドメインモデルに落とし込み
 
-        serviceImpl.createOrder()
+        serviceImpl.createOrder(
+            itemType = ItemType.valueOf(request.itemType),
+            price = request.price,
+            currency = request.currency)
 
         return ResponseEntity.ok("success")
     }
