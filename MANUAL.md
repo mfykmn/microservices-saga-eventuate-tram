@@ -13,8 +13,15 @@ user@host: ~/workspace/microservice-sage-eventuate $ docker-compose -f docker-co
     ```
 - Order ServiceをCLIで利用する
     ```ShellSession
-    user@host: ~ $ curl -X GET http://0.0.0.0:10000/orders/23c0ef28-a8c3-40e4-8721-1c3c9f4e284f
-    user@host: ~ $ curl -X POST http://0.0.0.0:10000/orders
+    user@host: ~ $ curl -X POST http://0.0.0.0:10000/orders -H 'Content-type: application/json' -d '{
+      "item_type": "SMARTPHONE",
+      "price": 706,
+      "currency": "USD"
+    }'
+    success
+
+    user@host: ~ $ curl -X GET http://0.0.0.0:10000/orders/4cd40458-4b8a-4408-b9bd-bfac4b758749
+    {"orderId":"4cd40458-4b8a-4408-b9bd-bfac4b758749","itemType":"SMARTPHONE","price":706,"currency":"USD","orderStatus":"CREATED"}
     ```
 
 ### MySQL
