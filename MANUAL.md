@@ -1,18 +1,22 @@
 # Manual
-## docker-composeによる環境構築
-
-```ShellSession
-user@host: ~/workspace/microservice-sage-eventuate $ docker-compose -f docker-compose.yml up
-```
-
-- Service実行
+それぞれ別のターミナルで行う
+- docker-composeによる環境構築
     ```ShellSession
-    user@host: ~/workspace/microservice-sage-eventuate/order-service $ ./gradlew bootRun
+    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose -f docker-compose.yml up
+    ```
+- Order Service実行
+    gradle build実行後に
+    ```ShellSession
+    user@host: ~/workspace/microservice-sage-eventuate-tram/order-service $ ./gradlew bootRun
+    ```
+- Payment Service実行
+  gradle build実行後に
+    ```ShellSession
+    user@host: ~/workspace/microservice-sage-eventuate-tram/payment-service $ ./gradlew bootRun
     ```
 
 ## Usage
 ### App
-
 - Order ServiceをCLIで利用する
     ```ShellSession
     user@host: ~ $ curl -X POST http://0.0.0.0:10000/orders -H 'Content-type: application/json' -d '{
@@ -25,11 +29,15 @@ user@host: ~/workspace/microservice-sage-eventuate $ docker-compose -f docker-co
     user@host: ~ $ curl -X GET http://0.0.0.0:10000/orders/4cd40458-4b8a-4408-b9bd-bfac4b758749
     {"order_id":"4cd40458-4b8a-4408-b9bd-bfac4b758749","order_status":"CREATED","item_type":"SMARTPHONE","price":706,"currency":"USD"}
     ```
+- Payment ServiceをCLIで利用する
+    ```ShellSession
+    user@host: ~ $ curl -X GET http://0.0.0.0:10001/payments/4cd40458-4b8a-4408-b9bd-bfac4b758749
+    ```
 
 ### MySQL
 - CLIを利用する
     ```ShellSession
-    user@host: ~/workspace/microservice-sage-eventuate $ docker-compose exec db bash
+    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec order-db bash
     root@266dd6efb58d:/# mysql -u user -p
     ```
 
@@ -40,7 +48,7 @@ user@host: ~/workspace/microservice-sage-eventuate $ docker-compose -f docker-co
     ```
 - Kafka CLIを利用する
     ```ShellSession
-    user@host: ~/workspace/microservice-sage-eventuate $ docker-compose exec broker bash
+    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec broker bash
     [appuser@fb71f61a1291 ~]$ kafka-console-producer --broker-list localhost:9092 --topic hoge
     > test1
     > test2
