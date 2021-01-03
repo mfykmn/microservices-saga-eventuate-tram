@@ -6,6 +6,4 @@ import com.example.sagas.domain.entity.Order
 import com.example.sagas.domain.entity.OrderId
 
 @Repository
-interface OrderRepository : CrudRepository<Order, Long?> {
-    fun findByOrderId(orderId: OrderId): Order?
-}
+interface OrderRepository : CrudRepository<Order, OrderId>

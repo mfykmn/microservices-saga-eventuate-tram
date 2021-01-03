@@ -6,11 +6,13 @@ import javax.persistence.Entity
 import javax.persistence.Table
 import javax.persistence.Id
 import javax.persistence.Column
+import javax.persistence.Enumerated
+import javax.persistence.EnumType
 
 typealias OrderId = String
 
 enum class OrderStatus {
-    CREATED, SHIPPED, REJECTED
+    CREATED, SHIPPED, APPROVED, REJECTED
 }
 
 enum class ItemType {
@@ -25,7 +27,8 @@ class Order(
     val orderId: OrderId,
 
     @Column(name="item_type")
-    var itemType: String,
+    @Enumerated(EnumType.STRING)
+    var itemType: ItemType,
 
     @Column(name="price")
     var price: BigDecimal,
@@ -34,20 +37,25 @@ class Order(
     var currency: String,
 
     @Column(name="order_status")
-    var orderStatus: String) {
+    @Enumerated(EnumType.STRING)
+    var orderStatus: OrderStatus) {
 
     constructor(_itemType: ItemType, _price: BigDecimal, _currency: String) : this(
         UUID.randomUUID().toString(),
-        _itemType.toString(),
+        _itemType,
         _price,
         _currency,
-        OrderStatus.CREATED.toString())
+        OrderStatus.CREATED)
 
-    fun shipped() {
-        this.orderStatus = OrderStatus.SHIPPED.toString()
+    fun approve() {
+        this.orderStatus = OrderStatus.APPROVED
+    }
+
+    fun ship() {
+        this.orderStatus = OrderStatus.SHIPPED
     }
 
     fun rejected() {
-        this.orderStatus = OrderStatus.REJECTED.toString()
+        this.orderStatus = OrderStatus.REJECTED
     }
 }

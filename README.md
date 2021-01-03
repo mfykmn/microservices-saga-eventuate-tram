@@ -5,13 +5,16 @@
   - データベースの更新とメッセージの送信は、データの不整合やバグを回避するために原子性を担保する必要がありそのためのパターン
   - データ格納先のテーブルとOutboxテーブルをトランザクションでまとめている
 - [Transaction log tailing](https://microservices.io/patterns/data/transaction-log-tailing.html)を実装
-  - [CDC](https://eventuate.io/abouteventuatetram.html)を実装しているため、binlogからメッセージブローカーへデータを送信する動きをすることでイベントを発行している
+  - [CDC](https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html)を実装しているため、binlogからメッセージブローカーへデータを送信する動きをすることでイベントを発行している
 - メッセージコンシューマのクラッシュなどの対応としてはメッセージコンシューマーはべき等であることを期待し、再度流せるような構成にする必要あり
 
 ## 参考リンク
 - https://eventuate.io/exampleapps.html
 - https://eventuate.io/abouteventuatetram.html
 - https://github.com/eventuate-tram/eventuate-tram-sagas-examples-customers-and-orders
+- https://chrisrichardson.net/post/sagas/2019/12/12/developing-sagas-part-4.html
+- https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html
+- https://eventuate.io/docs/manual/eventuate-tram/latest/
 - 関連パターン
   - https://microservices.io/patterns/data/saga.html
   - https://microservices.io/patterns/data/domain-event.html
