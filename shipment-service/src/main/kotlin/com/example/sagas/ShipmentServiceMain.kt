@@ -6,16 +6,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Configuration
-import io.eventuate.tram.sagas.spring.orchestration.SagaOrchestratorConfiguration
+import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
 @Configuration
-@Import(
-    SagaOrchestratorConfiguration::class,
-    TramMessageProducerJdbcConfiguration::class,
+@Import(TramMessageProducerJdbcConfiguration::class,
     EventuateTramKafkaMessageConsumerConfiguration::class)
-class OrderServiceMain
+@ComponentScan
+class ShipmentServiceMain
 
 fun main(args: Array<String>) {
-    runApplication<OrderServiceMain>(*args)
+    runApplication<ShipmentServiceMain>(*args)
 }
