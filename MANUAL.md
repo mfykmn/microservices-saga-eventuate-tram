@@ -24,19 +24,24 @@
 ### App
 - Order ServiceをCLIで利用する
     ```ShellSession
-    user@host: ~ $ curl -X POST http://0.0.0.0:10000/orders -H 'Content-type: application/json' -d '{
+    user@host: ~ $ curl -X POST http://0.0.0.0:10000/api/order/v1/orders -H 'Content-type: application/json' -d '{
       "item_type": "SMARTPHONE",
       "price": 706,
       "currency": "USD"
     }'
     {"order_id":"4cd40458-4b8a-4408-b9bd-bfac4b758749","order_status":"CREATED"}
 
-    user@host: ~ $ curl -X GET http://0.0.0.0:10000/orders/4cd40458-4b8a-4408-b9bd-bfac4b758749
+    user@host: ~ $ curl -X GET http://0.0.0.0:10000/api/order/v1/orders/4cd40458-4b8a-4408-b9bd-bfac4b758749
     {"order_id":"4cd40458-4b8a-4408-b9bd-bfac4b758749","order_status":"CREATED","item_type":"SMARTPHONE","price":706,"currency":"USD"}
     ```
 - Payment ServiceをCLIで利用する
     ```ShellSession
-    user@host: ~ $ curl -X GET http://0.0.0.0:10001/payments/4cd40458-4b8a-4408-b9bd-bfac4b758749
+    user@host: ~ $ curl -X POST http://0.0.0.0:10001/api/payment/v1/invoices -H 'Content-type: application/json' -d '{
+      "order_id": "4cd40458-4b8a-4408-b9bd-bfac4b758749"
+    }'
+    {"payment_id":"34e0169a-b4f9-41c5-949c-792d25cf533f","Invoice_status":"PAID"}
+    user@host: ~ $ curl -X GET http://0.0.0.0:10001/api/payment/v1/invoices/34e0169a-b4f9-41c5-949c-792d25cf533f
+    {"payment_id":"34e0169a-b4f9-41c5-949c-792d25cf533f","order_id":"4cd40458-4b8a-4408-b9bd-bfac4b758749","invoice_status":"PAID"}
     ```
 - Shipment ServiceをCLIで利用する
     ```ShellSession

@@ -10,16 +10,15 @@ import com.example.sagas.domain.entity.OrderId
 import com.example.sagas.domain.repository.OrderRepository
 
 @RestController
-@RequestMapping(path = ["orders"])
+@RequestMapping(path = ["api/order/v1"])
 class OrderServiceHandler {
-
     @Autowired
     lateinit var orderService: OrderService
 
     @Autowired
     lateinit var orderRepository: OrderRepository
 
-    @GetMapping(path = ["{order_id}"])
+    @GetMapping(path = ["orders/{order_id}"])
     fun getOrder(@PathVariable("order_id") orderId: OrderId) : ResponseEntity<GetOrderResponse> {
         try {
             val order = orderRepository.findById(orderId).get()
@@ -38,7 +37,7 @@ class OrderServiceHandler {
         }
     }
 
-    @PostMapping()
+    @PostMapping(path = ["orders"])
     fun createOrder(@RequestBody request: CreateOrderRequest) : ResponseEntity<CreateOrderResponse> {
         // TODO: バリデーション
 
