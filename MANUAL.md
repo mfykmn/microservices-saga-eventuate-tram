@@ -65,5 +65,5 @@
 - Kafka ConsumerをCLIから利用する
     ```ShellSession
     user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec broker bash
-    [appuser@fb71f61a1291 ~]$ kafka-console-consumer --bootstrap-server=localhost:29092 --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply
+    [appuser@fb71f61a1291 ~]$ kafka-console-consumer --bootstrap-server=localhost:29092 --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply  --group com.example.sagas.sagas.createorder.CreateOrderSaga-consumer
     ```
