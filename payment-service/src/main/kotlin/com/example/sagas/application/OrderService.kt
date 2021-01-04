@@ -13,7 +13,7 @@ class PaymentService {
     lateinit var invoiceRepository: InvoiceRepository
 
     @Transactional
-    fun createInvoice(orderId: OrderId) : Invoice {
+    fun reserveInvoice(orderId: OrderId) : Invoice {
         val invoice = Invoice(orderId)
         return invoiceRepository.save(invoice)
     }

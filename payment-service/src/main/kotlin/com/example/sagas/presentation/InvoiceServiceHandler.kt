@@ -35,12 +35,12 @@ class PaymentServiceHandler {
         }
     }
 
-    @PostMapping(path = ["invoices"])
-    fun createInvoice(@RequestBody request: CreateInvoiceRequest) : ResponseEntity<CreateInvoiceResponse> {
-        // TODO: バリデーション
-
-        val invoice = paymentService.createInvoice(request.orderId)
-
-        return ResponseEntity.ok(CreateInvoiceResponse(paymentId = invoice.paymentId, invoiceStatus = invoice.invoiceStatus.toString()))
-    }
+//    @PostMapping(path = ["invoices"])
+//    fun createInvoice(@RequestBody request: CreateInvoiceRequest) : ResponseEntity<CreateInvoiceResponse> {
+//        // TODO: バリデーション
+//
+//        val invoice = paymentService.createInvoice(request.orderId)
+//
+//        return ResponseEntity.ok(CreateInvoiceResponse(paymentId = invoice.paymentId, invoiceStatus = invoice.invoiceStatus.toString()))
+//    }
 }

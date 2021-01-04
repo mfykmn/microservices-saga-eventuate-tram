@@ -2,6 +2,30 @@
 version: '3.8'
 services:
 #
+# >>> cdcservice
+# https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html
+#
+  cdcservice:
+    image: eventuateio/eventuate-tram-cdc-mysql-service:0.11.1.RELEASE
+    ports:
+      - 8099:8080
+    depends_on:
+      - order-db
+      - payment-db
+      - broker
+      - zookeeper
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.jdbc.Driver
+      SPRING_DATASOURCE_URL: jdbc:mysql://0.0.0.0:3306/eventuate
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      EVENTUATELOCAL_CDC_DB_USER_NAME: root
+      EVENTUATELOCAL_CDC_DB_PASSWORD: root
+      EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID: 1234567890
+      EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS: 0.0.0.0:29092
+# <<< cdcservice
+
+#
 # >>> cp-all-in-one
 # https://github.com/confluentinc/cp-all-in-one/blob/6.0.1-post/cp-all-in-one/docker-compose.yml
 #
@@ -192,15 +216,15 @@ services:
       MYSQL_DATABASE: payment
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-  shipment-db:
-    image: mysql:5.6
-    ports:
-      - 3308:3306
-    volumes:
-      - "./docker/shipment-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: payment
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+#  shipment-db:
+#    image: mysql:5.6
+#    ports:
+#      - 3308:3306
+#    volumes:
+#      - "./docker/shipment-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: payment
+#      MYSQL_USER: user
+#      MYSQL_PASSWORD: password
 # <<< mongodb
