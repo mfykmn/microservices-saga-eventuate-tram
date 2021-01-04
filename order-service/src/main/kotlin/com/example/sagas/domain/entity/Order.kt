@@ -12,7 +12,7 @@ import javax.persistence.EnumType
 typealias OrderId = String
 
 enum class OrderStatus {
-    CREATED, SHIPPED, APPROVED, REJECTED
+    CREATED, APPROVED, REJECTED
 }
 
 enum class ItemType {
@@ -49,10 +49,6 @@ class Order(
 
     fun approve() {
         this.orderStatus = OrderStatus.APPROVED
-    }
-
-    fun ship() {
-        this.orderStatus = OrderStatus.SHIPPED
     }
 
     fun rejected() {
