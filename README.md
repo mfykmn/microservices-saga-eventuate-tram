@@ -9,11 +9,14 @@
 - メッセージコンシューマのクラッシュなどの対応としてはメッセージコンシューマーはべき等であることを期待し、再度流せるような構成にする必要あり
 
 ## 参考リンク
-- https://eventuate.io/exampleapps.html
-- https://eventuate.io/abouteventuatetram.html
-- https://chrisrichardson.net/post/sagas/2019/12/12/developing-sagas-part-4.html
-- https://eventuate.io/docs/manual/eventuate-tram/latest/
-- https://rheb.hatenablog.com/entry/2020/02/10/event-sourcing-vs-cdc/  
+- 構成理解
+  - https://eventuate.io/exampleapps.html
+  - https://eventuate.io/abouteventuatetram.html
+  - https://chrisrichardson.net/post/sagas/2019/12/12/developing-sagas-part-4.html
+  - https://eventuate.io/docs/manual/eventuate-tram/latest/
+  - https://rheb.hatenablog.com/entry/2020/02/10/event-sourcing-vs-cdc/
+- 環境構築
+  - https://medium.com/@erandika_harshani/how-to-setup-eventuate-tram-framework-locally-b27f5ba36b87
 - 設計参考
   - https://github.com/microservices-patterns/ftgo-application
   - https://github.com/eventuate-tram/eventuate-tram-sagas-examples-customers-and-orders
