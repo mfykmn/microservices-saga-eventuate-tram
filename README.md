@@ -13,7 +13,9 @@
 - https://eventuate.io/abouteventuatetram.html
 - https://chrisrichardson.net/post/sagas/2019/12/12/developing-sagas-part-4.html
 - https://eventuate.io/docs/manual/eventuate-tram/latest/
+- https://rheb.hatenablog.com/entry/2020/02/10/event-sourcing-vs-cdc/  
 - 設計参考
+  - https://github.com/microservices-patterns/ftgo-application
   - https://github.com/eventuate-tram/eventuate-tram-sagas-examples-customers-and-orders
   - https://github.com/dashsaurabh/saga-pattern-axon-spring-boot-sample
 - 関連パターン
