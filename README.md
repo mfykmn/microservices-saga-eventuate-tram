@@ -11,10 +11,11 @@
 ## 参考リンク
 - https://eventuate.io/exampleapps.html
 - https://eventuate.io/abouteventuatetram.html
-- https://github.com/eventuate-tram/eventuate-tram-sagas-examples-customers-and-orders
 - https://chrisrichardson.net/post/sagas/2019/12/12/developing-sagas-part-4.html
-- https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html
 - https://eventuate.io/docs/manual/eventuate-tram/latest/
+- 設計参考
+  - https://github.com/eventuate-tram/eventuate-tram-sagas-examples-customers-and-orders
+  - https://github.com/dashsaurabh/saga-pattern-axon-spring-boot-sample
 - 関連パターン
   - https://microservices.io/patterns/data/saga.html
   - https://microservices.io/patterns/data/domain-event.html
