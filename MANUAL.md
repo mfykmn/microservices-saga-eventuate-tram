@@ -56,19 +56,26 @@
     ```
 
 ### Kafka
-- Confluent Control Centerを開く
+- Kafka Topic確認
     ```ShellSession
-    user@host: ~ $ open http://0.0.0.0:9021
+    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec kafka bash
+    [appuser@fb71f61a1291 ~]$ kafka-topics --list --bootstrap-server kafka:9092
+    com.example.sagas.sagas.createorder.CreateOrderSaga-reply
     ```
-- Kafka CLIを利用する
+- Kafka Produce
     ```ShellSession
-    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec broker bash
-    [appuser@fb71f61a1291 ~]$ kafka-console-producer --broker-list localhost:9092 --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply
+    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec kafka bash
+    [appuser@fb71f61a1291 ~]$ kafka-console-producer \
+      --broker-list localhost:9092 \
+      --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply
     > test1
     > test2
     ```
-- Kafka ConsumerをCLIから利用する
+- Kafka Consume
     ```ShellSession
-    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec broker bash
-    [appuser@fb71f61a1291 ~]$ kafka-console-consumer --bootstrap-server=localhost:29092 --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply  --group com.example.sagas.sagas.createorder.CreateOrderSaga-consumer
+    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec kafka bash
+    [appuser@fb71f61a1291 ~]$ kafka-console-consumer \
+      --bootstrap-server kafka:9092 \
+      --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply \
+      --from-beginning
     ```
