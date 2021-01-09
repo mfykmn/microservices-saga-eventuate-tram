@@ -8,6 +8,7 @@ import io.eventuate.tram.commands.consumer.CommandHandlerReplyBuilder.withFailur
 import io.eventuate.tram.commands.consumer.CommandHandlerReplyBuilder.withSuccess
 import io.eventuate.tram.messaging.common.Message
 import io.eventuate.tram.sagas.participant.SagaCommandHandlersBuilder
+import org.springframework.stereotype.Component
 
 object PaymentServiceChannels {
     const val COMMAND_CHANNEL = "paymentService"
@@ -16,6 +17,7 @@ object PaymentServiceChannels {
 class CustomerNotFoundException : RuntimeException()
 class CustomerCreditLimitExceededException : RuntimeException()
 
+@Component
 class InvoiceServiceCommandHandler {
     @Autowired
     lateinit var paymentService: PaymentService
@@ -28,9 +30,10 @@ class InvoiceServiceCommandHandler {
     }
 
     private fun reserveInvoice(cm: CommandMessage<ReserveInvoiceCommand>): Message {
+        println("InvoiceServiceCommandHandler::reserveInvoice")
         return try {
-            val cmd: ReserveInvoiceCommand = cm.getCommand()
-            paymentService.reserveInvoice(cmd.orderId)
+            val invoice = paymentService.reserveInvoice(cm.command.orderId)
+            println(invoice)
             withSuccess(InvoiceReserved())
         } catch (e: CustomerNotFoundException) {
             withFailure(InvoiceNotFound())
