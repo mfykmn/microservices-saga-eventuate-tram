@@ -30,10 +30,8 @@ class InvoiceServiceCommandHandler {
     }
 
     private fun reserveInvoice(cm: CommandMessage<ReserveInvoiceCommand>): Message {
-        println("InvoiceServiceCommandHandler::reserveInvoice")
         return try {
-            val invoice = paymentService.reserveInvoice(cm.command.orderId)
-            println(invoice)
+            paymentService.reserveInvoice(cm.command.orderId)
             withSuccess(InvoiceReserved())
         } catch (e: CustomerNotFoundException) {
             withFailure(InvoiceNotFound())

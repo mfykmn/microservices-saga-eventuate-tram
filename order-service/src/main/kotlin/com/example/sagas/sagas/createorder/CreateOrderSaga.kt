@@ -24,14 +24,20 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
             .withCompensation(::reject)
         .step()
             .invokeParticipant(::reserveInvoice)
+            .onReply(InvoiceReserved::class.java, ::handleInvoiceReserved)
             .onReply(InvoiceNotFound::class.java, ::handleInvoiceNotFound)
             .onReply(InvoiceLimitExceeded::class.java, ::handleInvoiceLimitExceeded)
-        .step()
-            .invokeLocal(::approve)
         .build()
 
     override fun getSagaDefinition(): SagaDefinition<CreateOrderSagaData> {
         return sagaDefinition
+    }
+
+    private fun handleInvoiceReserved(
+        data: CreateOrderSagaData,
+        reply: InvoiceReserved
+    ) {
+        approve(data)
     }
 
     private fun handleInvoiceNotFound(
