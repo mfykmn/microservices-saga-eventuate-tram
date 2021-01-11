@@ -25,7 +25,7 @@ class OrderService {
     @Transactional
     fun createOrder(itemType: ItemType, price: BigDecimal, currency: String) : Order {
         val order = Order(itemType, price, currency)
-        val data = CreateOrderSagaData(order = order)
+        val data = CreateOrderSagaData(order = order, rejectionReason = null)
         sagaInstanceFactory.create(createOrderSaga, data)
         return orderRepository.findById(data.order.orderId).get()
     }

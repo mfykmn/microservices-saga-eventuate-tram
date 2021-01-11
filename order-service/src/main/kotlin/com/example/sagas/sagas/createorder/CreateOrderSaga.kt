@@ -26,6 +26,8 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
             .invokeParticipant(::reserveInvoice)
             .onReply(InvoiceNotFound::class.java, ::handleInvoiceNotFound)
             .onReply(InvoiceLimitExceeded::class.java, ::handleInvoiceLimitExceeded)
+        .step()
+            .invokeLocal(::approve)
         .build()
 
     override fun getSagaDefinition(): SagaDefinition<CreateOrderSagaData> {
@@ -64,14 +66,16 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
 
     private fun approve(data: CreateOrderSagaData) {
         println("CreateOrderSaga::approve")
-        orderRepository.findById(data.order.orderId).get().approve()
-        orderRepository.save(data.order)
+        val order = orderRepository.findById(data.order.orderId).get()
+        order.approve()
+        orderRepository.save(order)
     }
 
     private fun reject(data: CreateOrderSagaData) {
         println("CreateOrderSaga::reject")
-        data.order.reject()
-        orderRepository.save(data.order)
+        val order = orderRepository.findById(data.order.orderId).get()
+        order.reject(data.rejectionReason!!)
+        orderRepository.save(order)
         // TODO:  data.rejectionReasonの扱い
     }
 }

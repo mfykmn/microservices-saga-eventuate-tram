@@ -62,7 +62,8 @@ class Order(
         this.orderStatus = OrderStatus.APPROVED
     }
 
-    fun reject() {
+    fun reject(rejectionReason: RejectionReason) {
         this.orderStatus = OrderStatus.REJECTED
+        this.rejectionReason = rejectionReason
     }
 }
