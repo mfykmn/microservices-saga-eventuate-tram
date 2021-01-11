@@ -1,5 +1,6 @@
 package com.example.sagas.sagas.createorder
 
+import com.example.sagas.domain.entity.RejectionReason
 import com.example.sagas.domain.repository.OrderRepository
 import io.eventuate.tram.commands.consumer.CommandWithDestination
 import io.eventuate.tram.commands.consumer.CommandWithDestinationBuilder
@@ -38,7 +39,7 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
         data: CreateOrderSagaData,
         reply: InvoiceNotFound
     ) {
-        //data.rejectionReason = RejectionReason.UNKNOWN_CUSTOMER
+        data.rejectionReason = RejectionReason.UNKNOWN_CUSTOMER
         reject(data)
     }
 
@@ -46,7 +47,7 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
         data: CreateOrderSagaData,
         reply: InvoiceLimitExceeded
     ) {
-        //data.rejectionReason = RejectionReason.INSUFFICIENT_CREDIT
+        data.rejectionReason = RejectionReason.INSUFFICIENT_CREDIT
         reject(data)
     }
 
