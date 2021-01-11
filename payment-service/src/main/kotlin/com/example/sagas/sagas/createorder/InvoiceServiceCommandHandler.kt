@@ -18,7 +18,7 @@ class CustomerNotFoundException : RuntimeException()
 class CustomerCreditLimitExceededException : RuntimeException()
 
 @Component
-class InvoiceServiceCommandHandler {
+class ReserveInvoiceCommandHandler {
     @Autowired
     lateinit var paymentService: PaymentService
 

@@ -1,6 +1,6 @@
 package com.example.sagas
 
-import com.example.sagas.sagas.createorder.InvoiceServiceCommandHandler
+import com.example.sagas.sagas.createorder.ReserveInvoiceCommandHandler
 import io.eventuate.tram.commands.consumer.CommandDispatcher
 import io.eventuate.tram.sagas.participant.SagaCommandDispatcherFactory
 import io.eventuate.tram.sagas.spring.participant.SagaParticipantConfiguration
@@ -19,12 +19,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 class PaymentConfiguration {
 
     @Bean
-    fun consumerCommandDispatcher(
+    fun reserveInvoiceCommandDispatcher(
         sagaCommandDispatcherFactory: SagaCommandDispatcherFactory,
-        target: InvoiceServiceCommandHandler
+        target: ReserveInvoiceCommandHandler
     ): CommandDispatcher {
         return sagaCommandDispatcherFactory
-            .make("consumerCommandDispatcher",
+            .make("reserveInvoiceCommandDispatcher",
                 target.commandHandlerDefinitions()
         )
     }

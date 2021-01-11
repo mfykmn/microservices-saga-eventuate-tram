@@ -1,6 +1,5 @@
 package com.example.sagas.domain.entity
 
-import java.math.BigDecimal
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Table
