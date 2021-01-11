@@ -19,6 +19,10 @@ enum class ItemType {
     LAPTOP, HEADPHONE, SMARTPHONE
 }
 
+enum class RejectionReason {
+    INSUFFICIENT_CREDIT, UNKNOWN_CUSTOMER
+}
+
 @Entity
 @Table(name="orders")
 class Order(
@@ -38,20 +42,28 @@ class Order(
 
     @Column(name="order_status")
     @Enumerated(EnumType.STRING)
-    var orderStatus: OrderStatus) {
+    var orderStatus: OrderStatus,
+
+    @Column(name="rejection_reason")
+    @Enumerated(EnumType.STRING)
+    var rejectionReason: RejectionReason?
+) {
 
     constructor(_itemType: ItemType, _price: BigDecimal, _currency: String) : this(
         UUID.randomUUID().toString(),
         _itemType,
         _price,
         _currency,
-        OrderStatus.CREATED)
+        OrderStatus.CREATED,
+        null
+    )
 
     fun approve() {
         this.orderStatus = OrderStatus.APPROVED
     }
 
-    fun rejected() {
+    fun reject(rejectionReason: RejectionReason?) {
         this.orderStatus = OrderStatus.REJECTED
+        this.rejectionReason = rejectionReason
     }
 }
