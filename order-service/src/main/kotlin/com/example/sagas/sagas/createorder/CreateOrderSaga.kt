@@ -36,7 +36,7 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
         data: CreateOrderSagaData,
         reply: InvoiceNotFound
     ) {
-        data.rejectionReason = RejectionReason.UNKNOWN_CUSTOMER
+        //data.rejectionReason = RejectionReason.UNKNOWN_CUSTOMER
         reject(data)
     }
 
@@ -44,7 +44,7 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
         data: CreateOrderSagaData,
         reply: InvoiceLimitExceeded
     ) {
-        data.rejectionReason = RejectionReason.INSUFFICIENT_CREDIT
+        //data.rejectionReason = RejectionReason.INSUFFICIENT_CREDIT
         reject(data)
     }
 
