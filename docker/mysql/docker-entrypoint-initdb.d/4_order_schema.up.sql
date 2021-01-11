@@ -9,5 +9,6 @@ CREATE TABLE `orders`
   `price` decimal NOT NULL,
   `currency` varchar(10) NOT NULL,
   `order_status` varchar(10) NOT NULL,
+  `rejection_reason` varchar(10),
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

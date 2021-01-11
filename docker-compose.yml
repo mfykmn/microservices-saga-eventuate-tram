@@ -10,12 +10,11 @@ services:
     ports:
       - 8099:8080
     depends_on:
-      - order-db
-      - payment-db
+      - mysql
       - kafka
       - zookeeper
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://order-db/eventuate
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql/eventuate
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.jdbc.Driver
@@ -64,30 +63,16 @@ services:
 #
 # >>> mysql
 #
-  order-db:
+  mysql:
     image: mysql:5.6
-    hostname: order-db
-    container_name: order-db
+    hostname: mysql
+    container_name: mysql
     ports:
       - 3306:3306
     volumes:
-      - "./docker/order-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+      - "./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: order
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-  payment-db:
-    image: mysql:5.6
-    hostname: payment-db
-    container_name: payment-db
-    ports:
-      - 3307:3306
-    volumes:
-      - "./docker/payment-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: payment
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-# <<< mongodb
+# <<< mysql

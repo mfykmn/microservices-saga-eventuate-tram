@@ -51,7 +51,7 @@
 ### MySQL
 - CLIを利用する
     ```ShellSession
-    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec order-db bash
+    user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec mysql bash
     root@266dd6efb58d:/# mysql -u user -p
     ```
 
