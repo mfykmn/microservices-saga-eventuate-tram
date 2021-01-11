@@ -76,6 +76,5 @@ class CreateOrderSaga : SimpleSaga<CreateOrderSagaData> {
         val order = orderRepository.findById(data.order.orderId).get()
         order.reject(data.rejectionReason!!)
         orderRepository.save(order)
-        // TODO:  data.rejectionReasonの扱い
     }
 }
