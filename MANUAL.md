@@ -77,6 +77,6 @@
     user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec kafka bash
     [appuser@fb71f61a1291 ~]$ kafka-console-consumer \
       --bootstrap-server kafka:29092 \
-      --topic paymentService \
+      --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply \
       --from-beginning
     ```
