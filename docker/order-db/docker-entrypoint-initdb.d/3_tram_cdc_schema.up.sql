@@ -2,6 +2,8 @@ USE eventuate;
 
 DROP Table IF Exists message;
 DROP Table IF Exists received_messages;
+DROP Table IF Exists cdc_monitoring;
+DROP Table IF Exists offset_store;
 
 CREATE TABLE message (
   id VARCHAR(767) PRIMARY KEY,
@@ -21,7 +23,5 @@ CREATE TABLE received_messages (
   creation_time BIGINT
 );
 
-CREATE TABLE eventuate.offset_store(
-  client_name VARCHAR(255) NOT NULL PRIMARY KEY,
-  serialized_offset VARCHAR(255)
-);
+CREATE TABLE cdc_monitoring (reader_id VARCHAR(767) PRIMARY KEY, last_time BIGINT);
+CREATE TABLE offset_store(client_name VARCHAR(255) NOT NULL PRIMARY KEY, serialized_offset VARCHAR(255));

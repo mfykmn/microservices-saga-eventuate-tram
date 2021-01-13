@@ -86,7 +86,7 @@
     user@host: ~/workspace/microservice-sage-eventuate-tram $ docker-compose exec kafka bash
     [appuser@fb71f61a1291 ~]$ kafka-console-consumer \
       --bootstrap-server kafka:29092 \
-      --topic com.example.sagas.sagas.createorder.CreateOrderSaga-reply \
+      --topic paymentService \
       --from-beginning
     {"payload":"{}","headers":{"commandreply_saga_id":"00000176f13b31a2-3a96de13129a0000","DATE":"Mon, 11 Jan 2021 11:35:58 GMT","reply_outcome-type":"SUCCESS","commandreply__destination":"paymentService","commandreply_reply_to":"com.example.sagas.sagas.createorder.CreateOrderSaga-reply","commandreply_type":"com.example.sagas.sagas.createorder.ReserveInvoiceCommand","DESTINATION":"com.example.sagas.sagas.createorder.CreateOrderSaga-reply","commandreply_saga_type":"com.example.sagas.sagas.createorder.CreateOrderSaga","reply_type":"com.example.sagas.sagas.createorder.InvoiceReserved","reply_to_message_id":"00000176f13b324a-3a96de13129a0000","ID":"00000176f13b357a-3a96de13129a0000"}}
     ```
