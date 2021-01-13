@@ -2,17 +2,18 @@
 version: '3.8'
 services:
 #
-# >>> cdcservice
+# >>> cdc
 # https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html
 #
-  cdcservice:
+  cdc:
     image: eventuateio/eventuate-cdc-service:0.9.0.RELEASE
+    hostname: cdc
+    container_name: cdc
     ports:
       - 8099:8080
     depends_on:
       - mysql
       - kafka
-      - zookeeper
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql/eventuate
       SPRING_DATASOURCE_USERNAME: user
@@ -27,7 +28,7 @@ services:
       EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID: 1234567890
       EVENTUATELOCAL_CDC_SOURCE_TABLE_NAME: message
       SPRING_PROFILES_ACTIVE: EventuatePolling
-# <<< cdcservice
+# <<< cdc
 
 #
 # >>> kafka
