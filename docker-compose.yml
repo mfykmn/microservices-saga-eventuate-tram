@@ -99,7 +99,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - "./docker/order-db/my.cnf:/etc/mysql/conf.d"
+      - "./docker/order-db/my.cnf:/etc/mysql/conf.d/my.cnf"
       - "./docker/order-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -113,7 +113,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - "./docker/payment-db/my.cnf:/etc/mysql/conf.d"
+      - "./docker/payment-db/my.cnf:/etc/mysql/conf.d/my.cnf"
       - "./docker/payment-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
     environment:
       MYSQL_ROOT_PASSWORD: root
