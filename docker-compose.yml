@@ -93,12 +93,13 @@ services:
 # >>> mysql
 #
   order-db:
-    image: mysql:5.7
+    image: mysql:5.6
     hostname: order-db
     container_name: order-db
     ports:
       - 3306:3306
     volumes:
+      - "./docker/order-db/my.cnf:/etc/mysql/conf.d/my.cnf"
       - "./docker/order-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -106,12 +107,13 @@ services:
       MYSQL_PASSWORD: password
 
   payment-db:
-    image: mysql:5.7
+    image: mysql:5.6
     hostname: payment-db
     container_name: payment-db
     ports:
       - 3307:3306
     volumes:
+      - "./docker/payment-db/my.cnf:/etc/mysql/conf.d/my.cnf"
       - "./docker/payment-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
     environment:
       MYSQL_ROOT_PASSWORD: root
