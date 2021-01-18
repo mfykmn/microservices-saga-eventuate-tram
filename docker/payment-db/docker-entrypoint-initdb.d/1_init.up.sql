@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS `eventuate`;
+GRANT ALL PRIVILEGES ON eventuate.* TO 'mysqluser'@'%' WITH GRANT OPTION;
+
+CREATE DATABASE IF NOT EXISTS `payment`;
+GRANT ALL ON *.* TO 'user'@'%';

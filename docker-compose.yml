@@ -12,22 +12,50 @@ services:
     ports:
       - 8099:8080
     depends_on:
-      - mysql
+      - order-db
+      - payment-db
       - kafka
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql/eventuate
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.jdbc.Driver
+      DEBUG: "true"
+
       EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
-      EVENTUATELOCAL_CDC_DB_USER_NAME: root
-      EVENTUATELOCAL_CDC_DB_PASSWORD: root
-      EVENTUATELOCAL_CDC_READER_NAME: ClientEventuateTram
-      EVENTUATELOCAL_CDC_MYSQL_BINLOG_CLIENT_UNIQUE_ID: 2
-      EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID: 1234567890
-      EVENTUATELOCAL_CDC_SOURCE_TABLE_NAME: message
-      SPRING_PROFILES_ACTIVE: EventuatePolling
+
+      EVENTUATE_CDC_PIPELINE_PIPELINE1_TYPE: eventuate-tram
+      EVENTUATE_CDC_PIPELINE_PIPELINE1_READER: reader1
+      EVENTUATE_CDC_PIPELINE_PIPELINE1_EVENTUATEDATABASESCHEMA: order
+      #EVENTUATE_CDC_PIPELINE_PIPELINE1_SOURCETABLENAME: message
+
+      EVENTUATE_CDC_PIPELINE_PIPELINE2_TYPE: eventuate-tram
+      EVENTUATE_CDC_PIPELINE_PIPELINE2_READER: reader2
+      EVENTUATE_CDC_PIPELINE_PIPELINE2_EVENTUATEDATABASESCHEMA: payment
+      #EVENTUATE_CDC_PIPELINE_PIPELINE2_SOURCETABLENAME: message
+
+      EVENTUATE_CDC_READER_READER1_TYPE: mysql-binlog
+      EVENTUATE_CDC_READER_READER1_DATASOURCEURL: jdbc:mysql://order-db:3306/eventuate
+      EVENTUATE_CDC_READER_READER1_DATASOURCEUSERNAME: user
+      EVENTUATE_CDC_READER_READER1_DATASOURCEPASSWORD: password
+      EVENTUATE_CDC_READER_READER1_DATASOURCEDRIVERCLASSNAME: com.mysql.jdbc.Driver
+      EVENTUATE_CDC_READER_READER1_LEADERSHIPLOCKPATH: /eventuate/cdc/leader/order
+      EVENTUATE_CDC_READER_READER1_CDCDBUSERNAME: root
+      EVENTUATE_CDC_READER_READER1_CDCDBPASSWORD: root
+      EVENTUATE_CDC_READER_READER1_READOLDDEBEZIUMDBOFFSETSTORAGETOPIC: "false"
+      EVENTUATE_CDC_READER_READER1_MYSQLBINLOGCLIENTUNIQUEID: 1
+      EVENTUATE_CDC_READER_READER1_OFFSETSTOREKEY: MySqlBinlog
+      EVENTUATE_CDC_READER_READER1_OFFSETSTORAGETOPICNAME: db.history.order
+
+      EVENTUATE_CDC_READER_READER2_TYPE: mysql-binlog
+      EVENTUATE_CDC_READER_READER2_DATASOURCEURL: jdbc:mysql://payment-db:3307/eventuate
+      EVENTUATE_CDC_READER_READER2_DATASOURCEUSERNAME: user
+      EVENTUATE_CDC_READER_READER2_DATASOURCEPASSWORD: password
+      EVENTUATE_CDC_READER_READER2_DATASOURCEDRIVERCLASSNAME: com.mysql.jdbc.Driver
+      EVENTUATE_CDC_READER_READER2_LEADERSHIPLOCKPATH: /eventuate/cdc/leader/payment
+      EVENTUATE_CDC_READER_READER2_CDCDBUSERNAME: root
+      EVENTUATE_CDC_READER_READER2_CDCDBPASSWORD: root
+      EVENTUATE_CDC_READER_READER2_READOLDDEBEZIUMDBOFFSETSTORAGETOPIC: "false"
+      EVENTUATE_CDC_READER_READER2_MYSQLBINLOGCLIENTUNIQUEID: 2
+      EVENTUATE_CDC_READER_READER2_OFFSETSTOREKEY: MySqlBinlog
+      EVENTUATE_CDC_READER_READER2_OFFSETSTORAGETOPICNAME: db.history.payment
 # <<< cdc
 
 #
@@ -64,14 +92,29 @@ services:
 #
 # >>> mysql
 #
-  mysql:
-    image: mysql:5.6
-    hostname: mysql
-    container_name: mysql
+  order-db:
+    image: mysql:5.7
+    hostname: order-db
+    container_name: order-db
     ports:
       - 3306:3306
     volumes:
-      - "./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+      - "./docker/order-db/my.cnf:/etc/mysql/conf.d/my.cnf"
+      - "./docker/order-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+  payment-db:
+    image: mysql:5.7
+    hostname: payment-db
+    container_name: payment-db
+    ports:
+      - 3307:3306
+    volumes:
+      - "./docker/payment-db/my.cnf:/etc/mysql/conf.d/my.cnf"
+      - "./docker/payment-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: user
